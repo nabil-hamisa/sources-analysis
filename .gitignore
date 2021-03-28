@@ -1,0 +1,10 @@
+*.iml
+.idea/
+.idea/*
+*/target/
+target
+mvn
+spark-warehouse
+testData
+testData/*
+*dependency-reduced-pom.xml

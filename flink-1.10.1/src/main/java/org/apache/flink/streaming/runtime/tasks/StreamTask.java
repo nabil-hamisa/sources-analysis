@@ -50,7 +50,6 @@ import org.apache.flink.streaming.runtime.partitioner.StreamPartitioner;
 import org.apache.flink.streaming.runtime.streamrecord.StreamRecord;
 import org.apache.flink.streaming.runtime.streamstatus.StreamStatusMaintainer;
 import org.apache.flink.streaming.runtime.tasks.mailbox.*;
-import org.apache.flink.streaming.srcutils.SrcCount;
 import org.apache.flink.util.ExceptionUtils;
 import org.apache.flink.util.Preconditions;
 import org.slf4j.Logger;
@@ -435,7 +434,7 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 
 			beforeInvoke = System.nanoTime();
 			beforeInvoke();
-			SrcCount.addAndGet(SrcCount.Key.Index_0,System.nanoTime() - beforeInvoke);
+//			SrcCount.addAndGet(SrcCount.Key.Index_0,System.nanoTime() - beforeInvoke);
 
 			// final check to exit early before starting to run
 			if (canceled) {
@@ -447,7 +446,7 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 			// let the task do its work
 			isRunning = true;
 			runMailboxLoop();
-			SrcCount.addAndGet(SrcCount.Key.Index_1,System.nanoTime() - runMailboxLoop);
+//			SrcCount.addAndGet(SrcCount.Key.Index_1,System.nanoTime() - runMailboxLoop);
 
 			// if this left the run() method cleanly despite the fact that this was canceled,
 			// make sure the "clean shutdown" is not attempted
@@ -457,10 +456,10 @@ public abstract class StreamTask<OUT, OP extends StreamOperator<OUT>>
 
 			afterInvoke = System.nanoTime();
 			afterInvoke();
-			SrcCount.addAndGet(SrcCount.Key.Index_2,System.nanoTime() - afterInvoke);
 
+//			SrcCount.addAndGet(SrcCount.Key.Index_2,System.nanoTime() - afterInvoke);
 
-			SrcCount.printByFixTime(2000,SrcCount.Key.Index_1,SrcCount.Key.Index_2);
+//			SrcCount.printByFixTime(2000,SrcCount.Key.Index_1,SrcCount.Key.Index_2);
 
 		}
 		finally {
